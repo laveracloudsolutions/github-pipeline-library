@@ -38,5 +38,5 @@ jobs:
           echo "configuration-path: ${{ inputs.config-path }}"
           cat ${{ inputs.config-path }}
           echo "list folder"
-          ls -la .
-          ./.github/build_and_push.sh
+          ls -la ./.github/
+          #./.github/build_and_push.sh
