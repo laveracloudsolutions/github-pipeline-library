@@ -35,7 +35,19 @@ function build_and_push_to_github()
 
 }
 
-echo "...1234..."
+# On parse la liste des images du fichier ".github/images.json"
+readarray -t images < <(jq -c '.images[]' .github/images.json)
+for image in "${images[@]}"; do
+    echo "image = $image"
+    folder=$(echo "$image" | jq -r .folder)
+    image_tag=$(echo "$image" | jq -r .image_tag)
+    image_additionnal_tag=$(echo "$image" | jq -r .image_additionnal_tag)
+    platforms=$(echo "$image" | jq -r .platforms)
+
+    DOCKER_PLATFORMS="--platform ${platforms}"
+    build_and_push_to_github "${folder}" "${image_tag}" "${image_additionnal_tag}"
+done
+
 ## Buildx Images --platform linux/amd64,linux/arm64
 #DOCKER_PLATFORMS="--platform linux/amd64,linux/arm64"
 #build_and_push_to_github "pgadmin4" "dpage/pgadmin4:9.1"
