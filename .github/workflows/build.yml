@@ -36,4 +36,7 @@ jobs:
         run: |
           echo $GHCR_PAT | docker login ghcr.io -u $GHCR_USERNAME --password-stdin
           echo "configuration-path: ${{ inputs.config-path }}"
+          cat ${{ inputs.config-path }}
+          echo "list folder"
+          ls -la .
           ./.github/build_and_push.sh
