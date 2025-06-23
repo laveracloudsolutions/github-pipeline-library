@@ -35,8 +35,8 @@ function build_and_push_to_github()
 
 }
 
-# On parse la liste des images du fichier ".github/images.json"
-readarray -t images < <(jq -c '.images[]' .github/images.json)
+# On parse la liste des images du fichier ".scripts/images.json"
+readarray -t images < <(jq -c '.images[]' .scripts/images.json)
 for image in "${images[@]}"; do
     echo "image = $image"
     folder=$(echo "$image" | jq -r .folder)
