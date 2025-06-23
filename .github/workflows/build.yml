@@ -33,10 +33,7 @@ jobs:
         env:
           GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
           GHCR_PAT: ${{ secrets.GHCR_PAT }}
-        with:
-          repo-token: ${{ secrets.token }}
-          configuration-path: ${{ inputs.config-path }}
         run: |
           echo $GHCR_PAT | docker login ghcr.io -u $GHCR_USERNAME --password-stdin
-          echo "configuration-path: ${configuration-path}"
+          echo "configuration-path: ${{ inputs.config-path }}"
           ./.github/build_and_push.sh
