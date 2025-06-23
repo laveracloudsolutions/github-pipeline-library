@@ -27,12 +27,3 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-
-      # Update All Docker Images
-      - name: Update All Docker Images
-        env:
-          GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
-          GHCR_PAT: ${{ secrets.GHCR_PAT }}
-        run: |
-          echo $GHCR_PAT | docker login ghcr.io -u $GHCR_USERNAME --password-stdin
-          ./.scripts/push-base-images.sh
