@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+on:
+  workflow_call:
+#    inputs:
+#      config-path:
+#        required: true
+#        type: string
+#    secrets:
+#      personal_access_token:
+#        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Update All Docker Images
+      - name: Update All Docker Images
+        env:
+          GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
+          GHCR_PAT: ${{ secrets.GHCR_PAT }}
+        run: |
+          echo $GHCR_PAT | docker login ghcr.io -u $GHCR_USERNAME --password-stdin
+          ./.scripts/push-base-images.sh
