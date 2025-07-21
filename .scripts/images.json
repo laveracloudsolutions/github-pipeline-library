@@ -1,15 +1,9 @@
 {
   "images": [
     {
-      "folder": "php-runner-8.3.13",
-      "image_tag": "php-runner-8.3.13:lastest",
-      "image_additionnal_tag": "php-runner-8.3.13-01",
-      "platforms": "amd/arm"
-    },
-    {
-      "folder": "php-tools-8.3.13",
-      "image_tag": "php-tools-8.3.13:lastest",
-      "image_additionnal_tag": "php-tools-8.3.13-01",
+      "folder": "workshop",
+      "image_tag": "workshop:latest",
+      "image_additionnal_tag": "",
       "platforms": "amd/arm"
     }
   ]
