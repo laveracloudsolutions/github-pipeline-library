@@ -2,13 +2,13 @@
 
 Projet permettant de mutualiser les pipelines / fichiers / scripts nécessaires à la mise à jour des images Docker définis dans les différents repositories de type "Dockerfile | Docker Images"
 
-[[_TOC_]]
-
 ## Principe de Fonctionnement
 
 ### Images Tags (images.json)
 
-Chaque projet contient un ou plusieurs Dockerfile à préparer, la liste des images à préparer est définie dans le fichier [.scripts/images.json](.scripts/images.json)
+Chaque projet contient un ou plusieurs Dockerfile
+
+La liste des images à préparer est définie dans le fichier [.scripts/images.json](.scripts/images.json)
 
 Exemple:
 
@@ -41,7 +41,7 @@ IMPORTANT:
 * La préparation d'une image multiplateforme doit se faire en une seule étape (voir exemple ci-dessous)
 * Il n'est pas possible de créer une image avec un tag spécifique pour une plateforme puis, dans un second temps de pousser un même tag docker pour une plateforme différente. Le deuxième push va écraser le premier.
 
-Pour builder une image compatible avec plusiueurs plateformes
+Pour builder une image compatible avec plusieurs plateformes
 
 ```bash
 # Nom du tag
@@ -54,7 +54,7 @@ DOCKER_PLATFORMS="--platform linux/amd64,linux/arm64"
 docker buildx build ${DOCKER_TAG} ${DOCKER_PLATFORMS} . --push
 ```
 
-Ce script est mutualisé / utilisé par l'ensemble des projets Github Petroineos de type "Dockerfile | Docker images".
+Le script "build_and_push.sh" est mutualisé / utilisé par l'ensemble des projets Github Petroineos de type "Dockerfile | Docker images".
 
 Dans chaque projet, le script ".scripts/build_and_push.sh" est chargé / exécuté de la manière suivante
 
